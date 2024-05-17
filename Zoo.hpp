@@ -20,7 +20,10 @@ public:
 
     ~Zoo();
 
-    Zoo(const Zoo&) = delete;
-    Zoo& operator=(const Zoo&) = delete;
-};
 
+    Zoo(Zoo&& other) ;
+
+    Zoo& operator=(Zoo&& other);
+
+
+};
