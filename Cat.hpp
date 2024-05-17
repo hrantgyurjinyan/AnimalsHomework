@@ -10,5 +10,12 @@ public:
     void voice() const override;
 
     ~Cat() override;
-};
 
+    Cat(Cat&& other);
+
+    Cat& operator=(Cat&& other);
+
+    Cat(const Cat& other);
+    
+    Cat& operator=(const Cat& other);
+};
