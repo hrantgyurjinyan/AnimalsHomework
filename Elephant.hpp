@@ -10,5 +10,12 @@ public:
     void voice() const override;
 
     ~Elephant() override;
-};
 
+    Elephant(Elephant&& other);
+    Elephant& operator=(Elephant&& other) noexcept;
+
+
+    Elephant(const Elephant& other);
+
+    Elephant& operator=(const Elephant& other);
+};
