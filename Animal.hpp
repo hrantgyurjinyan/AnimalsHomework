@@ -14,5 +14,12 @@ public:
 
     int getAge() const;
     double getWeight() const;
-};
 
+    Animal(Animal&& other);
+
+    Animal& operator=(Animal&& other) noexcept;
+
+    Animal(const Animal& other);
+
+    Animal& operator=(const Animal& other);
+};
