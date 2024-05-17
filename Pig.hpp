@@ -10,4 +10,12 @@ public:
     void voice() const override;
 
     ~Pig() override;
+
+    Pig(Pig&& other);
+
+    Pig& operator=(Pig&& other);
+
+    Pig(const Pig& other);
+
+    Pig& operator=(const Pig& other);
 };
