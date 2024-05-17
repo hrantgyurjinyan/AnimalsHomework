@@ -7,7 +7,7 @@ Zoo::Zoo() {}
 
 Zoo& Zoo::getInstance() 
 {
-    if (!instance) 
+    if (!instance)
     {
         instance = new Zoo();
     }
@@ -21,16 +21,43 @@ void Zoo::addAnimal(Animal* animal)
 
 void Zoo::printAnimals() const 
 {
-    for (const auto& animal : animals) 
+    for (const auto& animal : animals)
     {
-        animal->voice();
+        std::cout << "Animal: " << typeid(*animal).name() << ", Age: " 
+                  << animal->getAge() << ", Weight: " << animal->getWeight() 
+                  << std::endl;
     }
 }
 
-Zoo::~Zoo() {
-    for (auto& animal : animals) 
+Zoo::~Zoo() 
+{
+    for (auto& animal : animals)
     {
         delete animal;
     }
     animals.clear();
+}
+
+// Move constructor
+Zoo::Zoo(Zoo&& other)
+    : animals(std::move(other.animals))
+{
+    other.animals.clear();
+}
+
+// Move assignment operator
+Zoo& Zoo::operator=(Zoo&& other) noexcept
+{
+    if (this != &other)
+    {
+        for (auto& animal : animals)
+        {
+            delete animal;
+        }
+        animals.clear();
+
+        animals = std::move(other.animals);
+        other.animals.clear();
+    }
+    return *this;
 }
