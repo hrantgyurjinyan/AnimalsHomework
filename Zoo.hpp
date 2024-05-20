@@ -17,13 +17,13 @@ public:
     void addAnimal(Animal* animal);
 
     void printAnimals() const;
+    void printThreeOldestAnimals() const;
 
     ~Zoo();
 
-
-    Zoo(Zoo&& other) ;
-
-    Zoo& operator=(Zoo&& other);
-
+    // Move constructor
+    Zoo(Zoo&& other) noexcept;
+    // Move assignment operator
+    Zoo& operator=(Zoo&& other) noexcept;
 
 };
