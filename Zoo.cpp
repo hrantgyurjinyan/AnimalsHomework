@@ -1,5 +1,6 @@
 #include "Zoo.hpp"
 #include <iostream>
+#include <algorithm>
 
 Zoo* Zoo::instance = nullptr;
 
@@ -29,6 +30,27 @@ void Zoo::printAnimals() const
     }
 }
 
+void Zoo::printThreeOldestAnimals() const
+{
+    if (animals.size() < 3)
+    {
+        std::cout << "Not enough animals to determine the three oldest." << std::endl;
+        return;
+    }
+
+    std::vector<Animal*> sortedAnimals = animals;
+    std::sort(sortedAnimals.begin(), sortedAnimals.end(), [](Animal* a, Animal* b) {
+        return *a > *b;
+    });
+
+    for (int i = 0; i < 3; ++i)
+    {
+        std::cout << "Animal: " << typeid(*sortedAnimals[i]).name() << ", Age: " 
+                  << sortedAnimals[i]->getAge() << ", Weight: " << sortedAnimals[i]->getWeight() 
+                  << std::endl;
+    }
+}
+
 Zoo::~Zoo() 
 {
     for (auto& animal : animals)
@@ -39,7 +61,7 @@ Zoo::~Zoo()
 }
 
 // Move constructor
-Zoo::Zoo(Zoo&& other)
+Zoo::Zoo(Zoo&& other) noexcept 
     : animals(std::move(other.animals))
 {
     other.animals.clear();
