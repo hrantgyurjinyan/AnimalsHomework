@@ -15,11 +15,18 @@ public:
     int getAge() const;
     double getWeight() const;
 
-    Animal(Animal&& other);
-
+    // Move constructor
+    Animal(Animal&& other) noexcept;
+    // Move assignment operator
     Animal& operator=(Animal&& other) noexcept;
 
+    // Copy constructor
     Animal(const Animal& other);
-
+    // Copy assignment operator
     Animal& operator=(const Animal& other);
+
+    // Comparison operators
+    bool operator<(const Animal& other) const;
+    bool operator>(const Animal& other) const;
+    bool operator==(const Animal& other) const;
 };
